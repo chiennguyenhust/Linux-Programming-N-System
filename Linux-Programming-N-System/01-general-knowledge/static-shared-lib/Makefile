@@ -12,7 +12,7 @@ LIB_DIR := $(CUR_DIR)/libs
 LIB_STATIC := $(LIB_DIR)/static
 LIB_SHARED := $(LIB_DIR)/shared
 
-INC_FLAGS := -I $(INC_DIR)
+INC_FLAGS := -I $(INC_DIR) 
 CC := gcc
 
 mk_objs:
