@@ -39,11 +39,12 @@ all_shared_lib:mk_objs_shared_lib mk_shared install
 
 all_static_lib: mk_objs_static_lib mk_static
 	$(CC)  $(OBJ_DIR)/main.o  -L$(LIB_STATIC) -l$(LIB_NAME) -o $(BIN_DIR)/use-static-library
-	
+
 clean: 
 	rm -rf $(OBJ_DIR)/*
-	rm -rf $(LIB_SHARED)/lib$(LIB_NAME).so
-	rm -rf $(BIN_DIR)/use-shared-library
+	rm -rf $(LIB_SHARED)/*
+	rm -rf $(LIB_STATIC)/*
+	rm -rf $(BIN_DIR)/*
 
 
 
