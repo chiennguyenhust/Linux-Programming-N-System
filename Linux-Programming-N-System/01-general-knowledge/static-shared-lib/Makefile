@@ -1,4 +1,4 @@
-.PHONY: all clean
+.PHONY: mk_objs_shared_lib mk_objs_static_lib mk_shared mk_static install all_shared_lib all_static_lib clean
 
 LIB_NAME := test
 CUR_DIR := .
@@ -6,7 +6,6 @@ BIN_DIR := $(CUR_DIR)/bin
 INC_DIR := $(CUR_DIR)/inc
 SRC_DIR := $(CUR_DIR)/src
 OBJ_DIR := $(CUR_DIR)/objs
-
 
 LIB_DIR := $(CUR_DIR)/libs
 LIB_STATIC := $(LIB_DIR)/static
@@ -34,7 +33,7 @@ mk_static:
 install:
 	cp -f $(LIB_SHARED)/lib$(LIB_NAME).so /usr/lib
 
-all_shared_lib:mk_objs_shared_lib mk_shared install
+all_shared_lib: mk_objs_shared_lib mk_shared install
 	$(CC) $(OBJ_DIR)/main.o -L$(LIB_SHARED) -l$(LIB_NAME) -o $(BIN_DIR)/use-shared-library
 
 all_static_lib: mk_objs_static_lib mk_static
