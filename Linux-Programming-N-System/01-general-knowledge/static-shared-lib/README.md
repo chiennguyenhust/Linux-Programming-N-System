@@ -3,3 +3,4 @@
 - make install: copy shared lib vào folder lib của hệ thống usr/lib
 (Để chạy cần quyền sudo)
 
+
