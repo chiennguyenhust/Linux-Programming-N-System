@@ -7,7 +7,7 @@
   
 int main (void) 
 { 
-    int fd; 
+    int fd; //file descriptor
     int numb_read, numb_write;
     char buf1[12] = "hello world\n"; 
   
