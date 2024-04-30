@@ -1,0 +1,1 @@
+BT3. Tạo file test.txt và ghi một đoạn dữ liệu bất kì. Thực hiện ghi ra màn hình các thông tin: Loại file, tên file, thời gian chỉnh sửa file lần cuối, kích thước. (Sử dụng struct stat)
