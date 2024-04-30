@@ -10,6 +10,6 @@ void main(int argc, char *argv[])
     
     // In ra nội dung của mỗi command-line.
     for (i = 0; i < argc; i++) {
-        printf("argc[%d]: %s\n", i+1, argv[i]);
+        printf("argc[%d]: %s\n", i, argv[i]);
     }
 }

@@ -1,28 +1,44 @@
+#include <stdint.h>
 #include <stdio.h>
-#include<string.h> 
-#include<unistd.h> 
-#include <fcntl.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <sys/sysmacros.h>
+#include <time.h>
 
-int main(void)
+int main(int argc, char *argv[])
 {
-    int fd; //file descriptor
-    int numb_write;
-    char buf1[12] = "hello world\n"; 
-  
-    // assume foobar.txt is already created 
-    fd = open("test.txt", O_RDWR | O_CREAT , 0667);         
-    if (-1 == fd) { 
-	printf("open() hello.txt failed\n");
-    }      
+    struct stat sb; //statbuf
 
-    numb_write = write(fd, buf1, strlen(buf1));
-    printf("Write %d bytes to test.txt\n", numb_write);
-  
-    // lseek(fd, 2, SEEK_SET);
-    // write(fd, "AAAAAAAAAAAA", strlen("AAAAAAAAAAAA"));
-    
-    close(fd); 
-  
-    return 0; 
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <pathname>\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
 
+    if (lstat(argv[1], &sb) == -1) {
+        perror("lstat");
+        exit(EXIT_FAILURE);
+    }
+
+
+    printf("File type:");
+
+    switch (sb.st_mode & S_IFMT) {
+    case S_IFBLK:  printf("block device\n");            break;
+    case S_IFCHR:  printf("character device\n");        break;
+    case S_IFDIR:  printf("directory\n");               break;
+    case S_IFIFO:  printf("FIFO/pipe\n");               break;
+    case S_IFLNK:  printf("symlink\n");                 break;
+    case S_IFREG:  printf("regular file\n");            break;
+    case S_IFSOCK: printf("socket\n");                  break;
+    default:       printf("unknown?\n");                break;
+    }
+
+    printf("I-node number:     %ju\n", (uintmax_t) sb.st_ino);
+    printf("File size:         %jd bytes\n", (intmax_t) sb.st_size);
+    printf("Blocks allocated:  %jd\n", (intmax_t) sb.st_blocks);
+    printf("Last status change:       %s", ctime(&sb.st_ctime));
+    printf("Last file access:         %s", ctime(&sb.st_atime));
+    printf("Last file modification:   %s", ctime(&sb.st_mtime));
+
+    exit(EXIT_SUCCESS);
 }

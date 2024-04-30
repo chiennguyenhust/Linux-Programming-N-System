@@ -1,6 +1,8 @@
-.PHONY: all clean
+.PHONY := clean all
 
-all: 
+all:
 	gcc -o app main.c
+
 clean:
 	rm -rf app
+
